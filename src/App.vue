@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/"><h2>上传Git测试</h2></router-link> |
+      <router-link to="/"><h2 style="color: red">上传Git测试</h2></router-link> |
       <router-link to="/about">About</router-link>
     </nav>
     <router-view/>
