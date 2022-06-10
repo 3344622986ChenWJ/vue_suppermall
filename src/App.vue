@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <scroll ref="top" class="scroll-bar-content">
+    <scroll ref="top" :probe-type-go="3" @ToEven="getEven()" class="scroll-bar-content">
       <h2>轮播图</h2>
       <h2>轮播图</h2>
       <h2>轮播图</h2>
@@ -73,7 +73,7 @@
       <h2>轮播图</h2>
     </scroll>
     <!--监听组件的点击（其他事件也行）事件:@click.native-->
-    <back-top @click.native="backTop()"></back-top>
+    <back-top @click.native="backTop()" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -83,6 +83,11 @@
 
   export default {
     name: 'App',
+    data() {
+      return {
+        isShowBackTop: false
+      }
+    },
     components: {
       Scroll,
       BackTop
@@ -96,6 +101,16 @@
         //this.$refs.top.scroll.scrollTo(0,0,500)//在500毫秒内返回顶部
         //方法二：调用组件(scroll)里面的方法，并传参
         this.$refs.top.GoBackTop(0,0,500);
+      },
+      getEven(position) {
+        //子组件ScrollTest中传递过来的事件
+        //console.log(position)
+        if(undefined==position){//子组件传事件有点问题
+          //position.y > 1000
+          this.isShowBackTop = true
+        }else{
+          this.isShowBackTop = false
+        }
       }
     }
   }
